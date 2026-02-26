@@ -1,11 +1,35 @@
 import os
 import sqlite3
+import time
 from datetime import datetime
 from flask import Flask, jsonify, request
 
 DB_PATH = os.getenv("DB_PATH", "/data/app.db")
 
+
 app = Flask(__name__)
+
+# ---------- backup ----------
+def get_backup_info():
+    if not os.path.exists(BACKUP_PATH) or not os.path.isdir(BACKUP_PATH):
+        return None, None
+    
+    files = [f for f in os.listdir(BACKUP_PATH) 
+             if f.endswith('.db') and os.path.isfile(os.path.join(BACKUP_PATH, f))]
+    
+    if not files:
+        return None, None
+    
+    # Tri des backups par nom
+    files.sort(reverse=True)
+    last_file = files[0]
+    full_path = os.path.join(BACKUP_PATH, last_file)
+    
+    age_seconds = int(time.time() - os.path.getmtime(full_path))
+    
+    return last_file, age_seconds
+
+
 
 # ---------- DB helpers ----------
 def get_conn():
@@ -87,6 +111,25 @@ def count():
     conn.close()
 
     return jsonify(count=n)
+
+@app.get("/status")
+def status():
+    init_db()
+    
+    # Compteur d'événements
+    conn = get_conn()
+    cur = conn.execute("SELECT COUNT(*) FROM events")
+    count = cur.fetchone()[0]
+    conn.close()
+    
+    last_backup_file, backup_age_seconds = get_backup_info()
+    
+    return jsonify({
+        "count": count,
+        "last_backup_file": last_backup_file,
+        "backup_age_seconds": backup_age_seconds
+    })
+
 
 # ---------- Main ----------
 if __name__ == "__main__":

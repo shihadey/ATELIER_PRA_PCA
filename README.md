@@ -256,7 +256,7 @@ A noter que l'application du PRA se fait manuellement, ce qui n'arriverait pas e
 **Exercice 5 :**  
 Proposez une archtecture plus robuste.   
   
-*..Répondez à cet exercice ici..*
+Comme ennoncé dnas la réponse précédente, l'architecture a besoin de se renforcer. Je propose d'ajouter
 
 ---------------------------------------------------
 Séquence 6 : Ateliers  
