@@ -248,7 +248,10 @@ Le RTO lui est de l'ordre de grandeur de la minute (entre 1 et 2 minutes environ
 **Exercice 4 :**  
 Pourquoi cette solution (cet atelier) ne peux pas être utilisé dans un vrai environnement de production ? Que manque-t-il ?   
   
-*..Répondez à cet exercice ici..*
+Il n'y a aucune sécurité de la donnée qui est accessible par tous.
+Aucune redondance en cas de perte du node en local toutes les données sont perdues (data ET backup). Il faudrait faire des backups distants par exemple.
+A noter que l'application du PRA se fait manuellement, ce qui n'arriverait pas en prod.
+
   
 **Exercice 5 :**  
 Proposez une archtecture plus robuste.   
