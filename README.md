@@ -242,7 +242,8 @@ Les données sont suavegardées dans le pra-backup, indépendant de pra-data. Lo
 **Exercice 3 :**  
 Quels sont les RTO et RPO de cette solution ?  
   
-*..Répondez à cet exercice ici..*
+Ici le RPO est de 1 minute car le job cron s'éxecute à cet intervalle de temps.
+Le RTO lui est de l'ordre de grandeur de la minute (entre 1 et 2 minutes environ).
 
 **Exercice 4 :**  
 Pourquoi cette solution (cet atelier) ne peux pas être utilisé dans un vrai environnement de production ? Que manque-t-il ?   
