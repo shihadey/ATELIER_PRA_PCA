@@ -237,7 +237,7 @@ pra-data contient la base de donnée , pra-backup qui a les backups donc leur su
 **Exercice 2 :**  
 Expliquez nous pourquoi nous n'avons pas perdu les données lors de la supression du PVC pra-data  
   
-*..Répondez à cet exercice ici..*
+Les données sont suavegardées dans le pra-backup, indépendant de pra-data. Lorsqu'on lance la restauration les données du backup sont recopiées dans pra-data et tout revient en place.
 
 **Exercice 3 :**  
 Quels sont les RTO et RPO de cette solution ?  
